@@ -19,7 +19,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh 'ansiblePlaybook become: true, credentialsId: 'c488d524-342b-4f6e-8326-6adfff90cee0', disableHostKeyChecking: true, inventory: 'host.inv', playbook: 'deploy.yml''
+                ansiblePlaybook become: true, credentialsId: 'c488d524-342b-4f6e-8326-6adfff90cee0', disableHostKeyChecking: true, inventory: 'host.inv', playbook: 'deploy.yml'
             }
         }
     }

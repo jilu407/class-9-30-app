@@ -1,0 +1,17 @@
+---
+- name: install playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: install install
+      yum:
+        name: httpd
+        state: latest
+    - name: start httpd server       
+      service:
+        name: httpd
+        state: started
+    - name: copy files
+      copy: 
+        src: dist/class-9-30/
+        dest: /var/www/html/

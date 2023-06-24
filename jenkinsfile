@@ -1,0 +1,52 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('SCM') {
+            steps {
+                git 'https://github.com/jilu407/class-9-30-app.git'
+            }
+        }
+        stage('install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'npm run build --prod'
+            }
+        }
+        stage('deploy') {
+            steps {
+                ansiblePlaybook become: true, credentialsId: 'c488d524-342b-4f6e-8326-6adfff90cee0', disableHostKeyChecking: true, inventory: 'host.inv', playbook: 'deploy.yml'
+            }
+        }
+    }
+}
+/* Scripted pipeline 
+node { 
+
+    
+        stage('SCM') {
+          
+                git 'https://github.com/jilu407/class-9-30-app.git'
+           
+        }
+        stage('install') {
+            
+                sh 'npm install'
+           
+        }
+        stage('build') {
+            
+                sh 'npm run build --prod'
+          
+        }
+        stage('karthik') {
+           
+                sh 'sudo cp -r dist/class-9-30/* /var/www/html/'
+           
+        }
+}
+*/
